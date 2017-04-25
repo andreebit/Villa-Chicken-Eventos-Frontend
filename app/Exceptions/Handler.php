@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Exception;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -44,6 +46,21 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof ClientException || $exception instanceof RequestException) {
+            $response = $exception->getResponse();
+            if (!is_null($response)) {
+                $jsonObj = json_decode($exception->getResponse()->getBody());
+                $message = isset($jsonObj->error->message) ? $jsonObj->error->message : $jsonObj->message;
+                return redirect()->back()->withInput($request->input())->with('api_error_message', $message);
+            } else {
+                return redirect()->back()->withInput($request->input())->with('api_error_message', $exception->getMessage());
+            }
+        } else {
+            if(!$exception instanceof  \Illuminate\Validation\ValidationException) {
+                return redirect()->back()->withInput($request->input())->with('api_error_message', $exception->getMessage());
+            }
+        }
+
         return parent::render($request, $exception);
     }
 
