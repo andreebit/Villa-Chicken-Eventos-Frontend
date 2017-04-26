@@ -57,8 +57,12 @@ class Handler extends ExceptionHandler
                 return redirect()->back()->withInput($request->input())->with('api_error_message', $exception->getMessage());
             }
         } else {
-            return redirect()->back()->withInput($request->input())->with('api_error_message', $exception->getMessage());
+            if(!$exception instanceof  \Illuminate\Validation\ValidationException) {
+                return redirect()->back()->withInput($request->input())->with('api_error_message', $exception->getMessage());
+            }
         }
+
+        return parent::render($request, $exception);
     }
 
     /**

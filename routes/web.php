@@ -18,6 +18,7 @@ Route::group(['prefix' => 'events'], function () {
         Route::get('/', ['as' => 'packages.index', 'uses' => 'PackagesController@index']);
         Route::get('/form', ['as' => 'packages.create', 'uses' => 'PackagesController@create']);
         Route::get('/form/{id}', ['as' => 'packages.edit', 'uses' => 'PackagesController@edit']);
+        Route::post('/form', ['as' => 'packages.post-form', 'uses' => 'PackagesController@postForm']);
         Route::get('/delete/{id}', ['as' => 'packages.delete', 'uses' => 'PackagesController@delete']);
     });
 });

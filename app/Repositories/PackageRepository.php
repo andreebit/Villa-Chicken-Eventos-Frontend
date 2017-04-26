@@ -2,8 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Traits\CrudRepositoryTrait;
+
 class PackageRepository extends Repository
 {
+
+    use CrudRepositoryTrait;
 
     public function endpoint()
     {

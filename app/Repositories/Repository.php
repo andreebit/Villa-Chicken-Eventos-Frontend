@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 
-use GuzzleHttp\Client;
+use App\Clients\RequestClient;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -34,7 +34,7 @@ abstract class Repository
      */
     public function __construct()
     {
-        $this->requestClient = new Client();
+        $this->requestClient = new RequestClient([], ['Content-Type' => 'application/json']);
     }
 
 

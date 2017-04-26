@@ -1,3 +1,7 @@
 .navbar-brand {
   padding: 10px 15px;
 }
+
+label.error {
+  color: #FF0000;
+}

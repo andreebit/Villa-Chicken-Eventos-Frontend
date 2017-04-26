@@ -1,7 +1,7 @@
 @if (count($errors) > 0)
     <div class="alert alert-danger" role="alert">
         @foreach ($errors->all() as $error)
-            <span>{{ $error }}</span>
+            <span>{{ $error }}</span><br>
         @endforeach
     </div>
 @endif
@@ -9,6 +9,11 @@
 
 @if (session('api_error_message'))
     <div class="alert alert-danger" role="alert">{{ session('api_error_message') }}</div>
+@endif
+
+
+@if (session('error_message'))
+    <div class="alert alert-success" role="alert"> {{ session('error_message') }}</div>
 @endif
 
 
