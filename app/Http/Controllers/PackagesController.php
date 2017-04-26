@@ -38,7 +38,8 @@ class PackagesController extends Controller
     }
 
 
-    public function postForm(SavePackageRequest $request, PackageRepository $packageRepository) {
+    public function postForm(SavePackageRequest $request, PackageRepository $packageRepository)
+    {
         $id = $request->get('id', null);
         $data = $request->only(['event_type_id', 'name', 'minimum_pax', 'price']);
         $descriptions = $request->get('description');
@@ -54,7 +55,7 @@ class PackagesController extends Controller
 
         $data['items'] = $items;
 
-        if(isset($id) && !empty($id)) {
+        if (isset($id) && !empty($id)) {
             $response = $packageRepository->update($id, $data);
             $this->setSuccessMessage(trans('messages.success_update'));
         } else {
@@ -70,6 +71,23 @@ class PackagesController extends Controller
         $packageRepository->delete($id);
         $this->setSuccessMessage(trans('messages.success_delete'));
         return redirect(route('packages.index'));
+    }
+
+    public function preview(PackageRepository $packageRepository, EventTypeRepository $eventTypeRepository, Request $request)
+    {
+
+        $eventTypeId = $request->get('event_type_id', null);
+
+        $packages = [];
+        if (!is_null($eventTypeId)) {
+            $packages = $packageRepository->getByEventType($eventTypeId);
+            $packages = $packages->data;
+        }
+
+        return view('packages.preview', [
+            'eventTypes' => $eventTypeRepository->getPairIdName(),
+            'packages' => $packages
+        ]);
     }
 
 

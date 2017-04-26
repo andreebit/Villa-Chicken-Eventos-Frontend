@@ -20,5 +20,6 @@ Route::group(['prefix' => 'events'], function () {
         Route::get('/form/{id}', ['as' => 'packages.edit', 'uses' => 'PackagesController@edit']);
         Route::post('/form', ['as' => 'packages.post-form', 'uses' => 'PackagesController@postForm']);
         Route::get('/delete/{id}', ['as' => 'packages.delete', 'uses' => 'PackagesController@delete']);
+        Route::get('/preview', ['as' => 'packages.preview', 'uses' => 'PackagesController@preview']);
     });
 });

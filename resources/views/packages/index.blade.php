@@ -9,6 +9,7 @@
     </ol>
 
     <div class="text-right">
+        <a href="{{ route('packages.preview') }}" type="button" class="btn btn-default btn-sm">Vista Rápida</a>
         <a href="{{ route('packages.create') }}" type="button" class="btn btn-success btn-sm">Nuevo Paquete</a>
     </div>
     <hr>
@@ -31,7 +32,7 @@
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->minimum_pax }}</td>
-                    <td>{{ $item->price }}</td>
+                    <td>S/ {{ number_format($item->price, 2) }}</td>
                     <td>{{ $item->event_type }}</td>
                     <td>{{ count($item->items) }}</td>
                     <td>
