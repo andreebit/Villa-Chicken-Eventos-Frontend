@@ -30,7 +30,7 @@
     </div>
 
     <div class="form-group">
-        {{ Form::label('price', 'Precio por persona') }}
+        {{ Form::label('price', 'Precio por persona (S/)') }}
         {{ Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Ingresa el precio por persona del paquete', 'required' => 'required', 'data-rule-number' => 'true', 'data-rule-min' => '0']) }}
     </div>
 
