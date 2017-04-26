@@ -18,6 +18,7 @@
             <th>Código</th>
             <th>Nombre</th>
             <th>Tipo de Evento</th>
+            <th>Elementos</th>
             <th>Acciones</th>
         </tr>
         </thead>
@@ -28,6 +29,7 @@
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->event_type }}</td>
+                    <td>{{ count($item->items) }}</td>
                     <td>
                         <a href="{{ route('packages.edit', ['id' => $item->id]) }}" type="button" class="btn btn-primary btn-sm">Editar</a>
                         <a href="{{ route('packages.delete', ['id' => $item->id]) }}" type="button" class="btn btn-danger btn-sm">Borrar</a>
