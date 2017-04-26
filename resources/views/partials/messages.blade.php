@@ -8,7 +8,17 @@
 
 
 @if (session('api_error_message'))
-    <div class="alert alert-danger" role="alert">{{ session('api_error_message') }}</div>
+    <div class="alert alert-danger" role="alert">
+        {{ session('api_error_message') }}
+        @if(session('api_error_detail'))
+            <br>
+            @foreach(session('api_error_detail') as $item)
+                @foreach($item as $detail)
+                    {{ $detail }}<br>
+                @endforeach
+            @endforeach
+        @endif
+    </div>
 @endif
 
 

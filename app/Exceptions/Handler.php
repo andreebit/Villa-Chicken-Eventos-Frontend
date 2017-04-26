@@ -52,7 +52,12 @@ class Handler extends ExceptionHandler
             if (!is_null($response)) {
                 $jsonObj = json_decode($exception->getResponse()->getBody());
                 $message = isset($jsonObj->error->message) ? $jsonObj->error->message : $jsonObj->message;
-                return redirect()->back()->withInput($request->input())->with('api_error_message', $message);
+                $detail = isset($jsonObj->error->message)? $jsonObj->error->detail : [];
+                if(!empty($detail)) {
+                    return redirect()->back()->withInput($request->input())->with('api_error_message', $message)->with('api_error_detail', $detail);
+                } else {
+                    return redirect()->back()->withInput($request->input())->with('api_error_message', $message);
+                }
             } else {
                 return redirect()->back()->withInput($request->input())->with('api_error_message', $exception->getMessage());
             }
