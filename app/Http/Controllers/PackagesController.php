@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\PackageRepository;
 use Illuminate\Http\Request;
 
 class PackagesController extends Controller
 {
-    public function index()
+    public function index(PackageRepository $packageRepository)
     {
-        return view('packages.index');
+        $data = $packageRepository->getAll();
+        return view('packages.index', ['items' => $data->data]);
     }
 
 

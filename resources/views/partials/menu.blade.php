@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{ route('home.index') }}">
                 <img alt="Brand" src="{{ asset('img/logo.png') }}" width="32">
             </a>
         </div>

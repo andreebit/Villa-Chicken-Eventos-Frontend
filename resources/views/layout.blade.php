@@ -15,6 +15,7 @@
 @include('partials.menu')
 
 <div class="app-boddy container">
+    @include('partials.messages')
     @yield('content')
 </div>
 </body>

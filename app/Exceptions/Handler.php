@@ -46,6 +46,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
         if ($exception instanceof ClientException || $exception instanceof RequestException) {
             $response = $exception->getResponse();
             if (!is_null($response)) {
@@ -56,12 +57,8 @@ class Handler extends ExceptionHandler
                 return redirect()->back()->withInput($request->input())->with('api_error_message', $exception->getMessage());
             }
         } else {
-            if(!$exception instanceof  \Illuminate\Validation\ValidationException) {
-                return redirect()->back()->withInput($request->input())->with('api_error_message', $exception->getMessage());
-            }
+            return redirect()->back()->withInput($request->input())->with('api_error_message', $exception->getMessage());
         }
-
-        return parent::render($request, $exception);
     }
 
     /**
