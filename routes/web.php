@@ -22,4 +22,15 @@ Route::group(['prefix' => 'events'], function () {
         Route::get('/delete/{id}', ['as' => 'packages.delete', 'uses' => 'PackagesController@delete']);
         Route::get('/preview', ['as' => 'packages.preview', 'uses' => 'PackagesController@preview']);
     });
+
+
+    Route::group(['prefix' => 'quotations'], function () {
+        Route::get('/', ['as' => 'quotations.index', 'uses' => 'QuotationsController@index']);
+        Route::get('/form', ['as' => 'quotations.create', 'uses' => 'QuotationsController@create']);
+        Route::get('/form/{id}', ['as' => 'quotations.edit', 'uses' => 'QuotationsController@edit']);
+        Route::post('/form', ['as' => 'quotations.post-form', 'uses' => 'QuotationsController@postForm']);
+        Route::get('/delete/{id}', ['as' => 'quotations.delete', 'uses' => 'QuotationsController@delete']);
+        Route::get('/preview', ['as' => 'quotations.preview', 'uses' => 'QuotationsController@preview']);
+        Route::post('/search-customer', ['as' => 'quotations.search-customer', 'uses' => 'QuotationsController@postSearchCustomer']);
+    });
 });

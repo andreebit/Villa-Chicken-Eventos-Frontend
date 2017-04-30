@@ -23,6 +23,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Eventos <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ route('packages.index') }}">Actualizar Paquetes</a></li>
+                        <li><a href="{{ route('quotations.index') }}">Actualizar Cotizaciones</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

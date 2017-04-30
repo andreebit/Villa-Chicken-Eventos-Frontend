@@ -54,15 +54,23 @@ class Handler extends ExceptionHandler
                 $message = isset($jsonObj->error->message) ? $jsonObj->error->message : $jsonObj->message;
                 $detail = isset($jsonObj->error->message)? $jsonObj->error->detail : [];
                 if(!empty($detail)) {
+                    if ($request->ajax())
+                        return json_encode(['status' => 'error', 'api_error_message' => $message, 'api_error_detail' => $detail]);
                     return redirect()->back()->withInput($request->input())->with('api_error_message', $message)->with('api_error_detail', $detail);
                 } else {
+                    if ($request->ajax())
+                        return json_encode(['status' => 'error', 'api_error_message' => $message]);
                     return redirect()->back()->withInput($request->input())->with('api_error_message', $message);
                 }
             } else {
+                if ($request->ajax())
+                    return json_encode(['status' => 'error', 'api_error_message' => $exception->getMessage()]);
                 return redirect()->back()->withInput($request->input())->with('api_error_message', $exception->getMessage());
             }
         } else {
             if(!$exception instanceof  \Illuminate\Validation\ValidationException) {
+                if ($request->ajax())
+                    return json_encode(['status' => 'error', 'api_error_message' => $exception->getMessage()]);
                 return redirect()->back()->withInput($request->input())->with('api_error_message', $exception->getMessage());
             }
         }
