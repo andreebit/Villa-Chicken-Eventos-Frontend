@@ -27,6 +27,8 @@
 @endif
 
 
+<div id="ajax_error_message" class="alert alert-danger" style="display: none;" role="alert"></div>
+
 @if (session('success_message'))
     <div class="alert alert-success" role="alert"> {{ session('success_message') }}</div>
 @endif

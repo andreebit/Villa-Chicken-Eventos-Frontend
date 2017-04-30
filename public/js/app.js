@@ -33,4 +33,44 @@ $(function () {
         }
     });
 
+
+    $('#form_quotation_customer').validate({
+        submitHandler: function(form) {
+            $.post($(form).attr('action'), $(form).serialize(), function (response) {
+                if(response.status === 'error') {
+                    showErrorDialog(response.api_error_message);
+                    $('#form_quotation input[name="customer_id"]').val('');
+                    $('input[name="customer_full_name"]').val('');
+                    $('input[name="customer_phone_number"]').val('');
+                    $('input[name="customer_email"]').val('');
+                    $('input[name="customer_contact_full_name"]').val('');
+                    $('input[name="customer_contact_phone_number"]').val('');
+                    $('input[name="customer_contact_email"]').val('');
+                    return false;
+                } else {
+                    var data = response.data.data;
+                    $('#form_quotation input[name="customer_id"]').val(data.id);
+                    $('input[name="customer_full_name"]').val(data.name + ' ' + data.lastname);
+                    $('input[name="customer_phone_number"]').val(data.phone_number);
+                    $('input[name="customer_email"]').val(data.email);
+                    $('input[name="customer_contact_full_name"]').val(data.name_contact);
+                    $('input[name="customer_contact_phone_number"]').val(data.phone_number_contact);
+                    $('input[name="customer_contact_email"]').val(data.email_contact);
+                }
+            });
+        }
+    })
+
+
+    function showErrorDialog(message) {
+        var $modal = $('#ajax_error_message');
+        console.log($modal.length);
+        $modal.html(message);
+        $modal.fadeIn();
+
+        setTimeout(function () {
+            $modal.fadeOut();
+        }, 4000);
+    }
+
 });

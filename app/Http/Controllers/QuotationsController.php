@@ -101,7 +101,7 @@ class QuotationsController extends Controller
         $documentNumber = $request->get('document_number', null);
 
         $data = $customerRepository->getByDocument($documentType, $documentNumber);
-        return json_encode(['status' => 'success', 'data' => $data]);
+        return response()->json(['status' => 'success', 'data' => $data]);
     }
 
 
@@ -109,7 +109,7 @@ class QuotationsController extends Controller
         $eventTypeId = $request->get('event_type_id', null);
 
         $data = $materialRepository->getAllByEventType($eventTypeId);
-        return json_encode(['status' => 'success', 'data' => $data]);
+        return response()->json(['status' => 'success', 'data' => $data]);
     }
 
 }

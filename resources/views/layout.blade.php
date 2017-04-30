@@ -13,7 +13,7 @@
     <script src="{{ asset('js/mustache.min.js') }}"></script>
     <script src="{{ asset('js/jquery.validate/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('js/jquery.validate/messages_es_PE.min.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js' . '?' . uniqid()) }}"></script>
 
 </head>
 <body>
